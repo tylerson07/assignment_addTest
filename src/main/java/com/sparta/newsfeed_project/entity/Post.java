@@ -7,6 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 @Entity
 public class Post {
     @Id
-    private Long id;
+    private Long postid;
 
 }
