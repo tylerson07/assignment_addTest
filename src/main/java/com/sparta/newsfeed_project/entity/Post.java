@@ -12,7 +12,7 @@ import lombok.Setter;
 @Table(name = "users")
 public class Post {
 
-
+     //hello
     @Id
     @GeneratedValue
     private Long id;
