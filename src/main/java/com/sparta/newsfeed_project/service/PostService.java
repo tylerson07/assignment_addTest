@@ -43,10 +43,5 @@ public class PostService {
         return findPostId(id);
     }
 
-    public Post updatePost(Long id, PostRequestDto requestDto) {
-        Post post = findPostId(id);
-        post.update(requestDto);
-        return postRepository.save(post);
-    }
 
 }
