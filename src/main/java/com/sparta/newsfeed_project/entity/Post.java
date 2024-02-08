@@ -1,4 +1,5 @@
 package com.sparta.newsfeed_project.entity;
+import com.sparta.newsfeed_project.dto.PostRequestDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,6 +31,11 @@ public class Post {
         this.content =content;
         this.user = user;
     }
-//  wpqkfasdfsadffsddfaadsfsa
+
+    public void update(PostRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+        this.user = user;
+    }
 
 }

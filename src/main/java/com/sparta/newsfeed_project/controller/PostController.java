@@ -34,7 +34,7 @@ public class PostController {
                         .data(response)
                         .build());
     }
-    @GetMapping("/post")
+    @GetMapping("/posts")
     public ResponseEntity<CommonResponse<List<PostResponseDto>>> getPostList(){
         List<Post> postList = postService.getPostList();
         List<PostResponseDto> response = postList.stream().map(PostResponseDto::new).toList();
@@ -44,9 +44,31 @@ public class PostController {
                         .msg("조회가 완료 되었습니다.")
                         .data(response)
                         .build());
-        //sdaㄹㄴㅁsafadffasdfasf
     }
+    @GetMapping("/post/{id}")
+    public ResponseEntity<CommonResponse<PostResponseDto>> getPosts(@PathVariable Long id){
+        Post post = postService.getPosts(id);
+        PostResponseDto response = new PostResponseDto(post);
 
+        return ResponseEntity.ok()
+                .body(CommonResponse.<PostResponseDto>builder()
+                        .statusCode(HttpStatus.OK.value())
+                        .msg("생성이 완료 되었습니다.")
+                        .data(response)
+                        .build());
+    }
+    @PutMapping("/post/{id}")
+    public ResponseEntity<CommonResponse<PostResponseDto>> updatePost(PostRequestDto requestDto,@PathVariable Long id){
+        Post post = postService.updatePost(id,requestDto);
+        PostResponseDto response = new PostResponseDto(post);
+
+        return ResponseEntity.ok()
+                .body(CommonResponse.<PostResponseDto>builder()
+                        .statusCode(HttpStatus.OK.value())
+                        .msg("생성이 완료 되었습니다.")
+                        .data(response)
+                        .build());
+    }
 
 
 }

@@ -25,4 +25,15 @@ public class PostService {
     public Post findPostId(Long id){
         return postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다"));
     }
+
+    public Post getPosts(Long id) {
+        return findPostId(id);
+    }
+
+    public Post updatePost(Long id, PostRequestDto requestDto) {
+        Post post = findPostId(id);
+        post.update(requestDto);
+        return post;
+    }
+
 }
