@@ -8,5 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 public class Post {
     @Id
     private Long postid;
+    //sfas
 
 }
