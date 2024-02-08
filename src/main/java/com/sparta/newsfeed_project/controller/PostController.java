@@ -44,8 +44,22 @@ public class PostController {
                         .msg("조회가 완료 되었습니다.")
                         .data(response)
                         .build());
-        //sdaㄹㄴㅁsafadffasdfasf
+
     }
+
+ /*   @PutMapping("/post/{id}")
+    public Long updatePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto){
+        return postService.update(id,requestDto);
+
+    }
+    */
+
+
+ @DeleteMapping("/post/{id}")
+    public Long deletePost(@PathVariable Long id){
+         return postService.delete(id);
+
+ }
 
 
 
