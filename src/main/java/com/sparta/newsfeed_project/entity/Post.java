@@ -22,19 +22,20 @@ public class Post {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id") // 외래 키
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
     @Builder
-    public Post(Long id,String title, String content){
+    public Post(Long id,String title, String content,User user){
         this.id = id;
         this.title =title;
         this.content =content;
+        this.user = user;
     }
 
     public void update(PostRequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
-        this.user = user;
+        this.user = requestDto.getUser();
     }
 
 }

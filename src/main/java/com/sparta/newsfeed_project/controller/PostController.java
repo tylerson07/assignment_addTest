@@ -4,6 +4,7 @@ import com.sparta.newsfeed_project.CommonResponse;
 import com.sparta.newsfeed_project.dto.PostRequestDto;
 import com.sparta.newsfeed_project.dto.PostResponseDto;
 import com.sparta.newsfeed_project.entity.Post;
+import com.sparta.newsfeed_project.entity.User;
 import com.sparta.newsfeed_project.service.PostService;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;

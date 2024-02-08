@@ -1,6 +1,7 @@
 package com.sparta.newsfeed_project.dto;
 
 import com.sparta.newsfeed_project.entity.Post;
+import com.sparta.newsfeed_project.entity.User;
 import lombok.*;
 
 @Getter
@@ -12,7 +13,7 @@ public class PostResponseDto {
     private Long id;
     private String content;
     private String title;
-
+    private User user;
 
 
 
@@ -23,6 +24,6 @@ public class PostResponseDto {
         this.id=post.getId();
         this.content = post.getContent();
         this.title =post.getTitle();
-
+        this.user = post.getUser();
     }
 }
