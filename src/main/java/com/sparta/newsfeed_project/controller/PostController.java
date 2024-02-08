@@ -19,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @Builder
+// gkdl
 public class PostController {
     private final PostService postService;
     @PostMapping("/post")
