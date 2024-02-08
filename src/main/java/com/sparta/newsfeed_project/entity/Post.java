@@ -1,20 +1,17 @@
 package com.sparta.newsfeed_project.entity;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Entity
 @Setter
-@NoArgsConstructor
-@Table(name = "users")
+@RequiredArgsConstructor
+@Table(name = "post")
 public class Post {
 
-     //hello
+    @Column(nullable = false)
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 100, nullable = false)
@@ -23,14 +20,15 @@ public class Post {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id") // 외래 키
+    private User user;
     @Builder
-    public Post(Long id,String title, String content){
+    public Post(Long id,String title, String content,User user){
         this.id = id;
         this.title =title;
         this.content =content;
-
-
-
+        this.user = user;
     }
 
 

@@ -12,9 +12,8 @@ public class PostRequestDto {
 
     public Post toEntity() {
         return Post.builder()
-                .title(title)
-                .content(content)
-
+                .title(this.title)
+                .content(this.content)
                 .build();
     }
 }

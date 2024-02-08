@@ -16,16 +16,7 @@ public class PostResponseDto {
 
 
 
-    public Post toEntity() {
-        Post build = Post.builder()
-                .id(id)
-                .content(content)
-                .title(title)
-                .build();
-        return build;
 
-
-    }
 
     @Builder
     public PostResponseDto(Post post){
