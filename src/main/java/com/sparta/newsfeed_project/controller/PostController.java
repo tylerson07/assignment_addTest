@@ -8,13 +8,14 @@ import com.sparta.newsfeed_project.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@RestController
+@Controller
 public class PostController {
     private final PostService postService;
     @PostMapping("/post")
@@ -41,6 +42,7 @@ public class PostController {
                         .build());
 
     }
+
 
 
 }
