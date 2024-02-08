@@ -62,7 +62,7 @@ public class PostController {
     public ResponseEntity<CommonResponse<PostResponseDto>> updatePost(@PathVariable Long id,PostRequestDto requestDto){
         Post post = postService.updatePost(id,requestDto);
         PostResponseDto response = new PostResponseDto(post);
-
+    // 완료
         return ResponseEntity.ok()
                 .body(CommonResponse.<PostResponseDto>builder()
                         .statusCode(HttpStatus.OK.value())
