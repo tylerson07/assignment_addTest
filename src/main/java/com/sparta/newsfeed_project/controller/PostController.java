@@ -48,11 +48,14 @@ public class PostController {
     @GetMapping("/post/{id}")
     public ResponseEntity<CommonResponse<PostResponseDto>> getPost(@PathVariable Long id){
         Post post = postService.getPost(id);
+    public ResponseEntity<CommonResponse<PostResponseDto>> getPosts(@PathVariable Long id){
+        Post post = postService.getPosts(id);
         PostResponseDto response = new PostResponseDto(post);
 
         return ResponseEntity.ok()
                 .body(CommonResponse.<PostResponseDto>builder()
                         .statusCode(HttpStatus.OK.value())
+
                         .msg("조회가 완료 되었습니다.")
                         .data(response)
                         .build());
@@ -60,6 +63,12 @@ public class PostController {
     @Transactional
     @PutMapping("/post/{id}")
     public ResponseEntity<CommonResponse<PostResponseDto>> updatePost(@PathVariable Long id,PostRequestDto requestDto){
+                        .msg("생성이 완료 되었습니다.")
+                        .data(response)
+                        .build());
+    }
+    @PutMapping("/post/{id}")
+    public ResponseEntity<CommonResponse<PostResponseDto>> updatePost(@RequestBody PostRequestDto requestDto,@PathVariable Long id){
         Post post = postService.updatePost(id,requestDto);
         PostResponseDto response = new PostResponseDto(post);
     // 완료
@@ -71,5 +80,10 @@ public class PostController {
                         .build());
     }
 //dg
+                        .msg("생성이 완료 되었습니다.")
+                        .data(response)
+                        .build());
+    }
 
+// asdfdsfsa
 }

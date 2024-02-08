@@ -4,6 +4,7 @@ import com.sparta.newsfeed_project.dto.PostRequestDto;
 import com.sparta.newsfeed_project.entity.Post;
 import com.sparta.newsfeed_project.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +37,16 @@ public class PostService {
 
     public Post findPostId(Long id){
         return postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다"));
+    }
+
+    public Post getPosts(Long id) {
+        return findPostId(id);
+    }
+
+    public Post updatePost(Long id, PostRequestDto requestDto) {
+        Post post = findPostId(id);
+        post.update(requestDto);
+        return postRepository.save(post);
     }
 
 }
