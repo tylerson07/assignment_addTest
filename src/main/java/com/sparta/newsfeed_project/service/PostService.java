@@ -4,6 +4,7 @@ import com.sparta.newsfeed_project.dto.PostRequestDto;
 import com.sparta.newsfeed_project.entity.Post;
 import com.sparta.newsfeed_project.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class PostService {
     public Post updatePost(Long id, PostRequestDto requestDto) {
         Post post = findPostId(id);
         post.update(requestDto);
-        return post;
+        return postRepository.save(post);
     }
 
 }
