@@ -9,7 +9,7 @@ import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,17 +34,42 @@ public class PostController {
                         .data(response)
                         .build());
     }
-    @GetMapping("/post")
+    @GetMapping("/posts")
     public ResponseEntity<CommonResponse<List<PostResponseDto>>> getPostList(){
         List<Post> postList = postService.getPostList();
         List<PostResponseDto> response = postList.stream().map(PostResponseDto::new).toList();
         return ResponseEntity.ok()
                 .body(CommonResponse.<List<PostResponseDto>>builder()
                         .statusCode(HttpStatus.OK.value())
+                        .msg("리스트 조회가 완료 되었습니다.")
+                        .data(response)
+                        .build());
+    }
+    @GetMapping("/post/{id}")
+    public ResponseEntity<CommonResponse<PostResponseDto>> getPost(@PathVariable Long id){
+        Post post = postService.getPost(id);
+        PostResponseDto response = new PostResponseDto(post);
+
+        return ResponseEntity.ok()
+                .body(CommonResponse.<PostResponseDto>builder()
+                        .statusCode(HttpStatus.OK.value())
                         .msg("조회가 완료 되었습니다.")
                         .data(response)
                         .build());
-        //sdaㄹㄴㅁsafadfasfdadfads
     }
+    @Transactional
+    @PutMapping("/post/{id}")
+    public ResponseEntity<CommonResponse<PostResponseDto>> updatePost(@PathVariable Long id,PostRequestDto requestDto){
+        Post post = postService.updatePost(id,requestDto);
+        PostResponseDto response = new PostResponseDto(post);
+
+        return ResponseEntity.ok()
+                .body(CommonResponse.<PostResponseDto>builder()
+                        .statusCode(HttpStatus.OK.value())
+                        .msg("수정이 완료 되었습니다.")
+                        .data(response)
+                        .build());
+    }
+//dgdgd
 
 }
