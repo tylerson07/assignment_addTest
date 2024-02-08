@@ -22,6 +22,7 @@ import java.util.List;
 // gkdl
 public class PostController {
     private final PostService postService;
+
     @PostMapping("/post")
     public ResponseEntity<CommonResponse<PostResponseDto>> createPost(@RequestBody PostRequestDto requestDto) {
         Post post = postService.createPost(requestDto);
@@ -34,8 +35,9 @@ public class PostController {
                         .data(response)
                         .build());
     }
+
     @GetMapping("/posts")
-    public ResponseEntity<CommonResponse<List<PostResponseDto>>> getPostList(){
+    public ResponseEntity<CommonResponse<List<PostResponseDto>>> getPostList() {
         List<Post> postList = postService.getPostList();
         List<PostResponseDto> response = postList.stream().map(PostResponseDto::new).toList();
         return ResponseEntity.ok()
@@ -45,11 +47,11 @@ public class PostController {
                         .data(response)
                         .build());
     }
+
     @GetMapping("/post/{id}")
-    public ResponseEntity<CommonResponse<PostResponseDto>> getPost(@PathVariable Long id){
+    public ResponseEntity<CommonResponse<PostResponseDto>> getPost(@PathVariable Long id) {
         Post post = postService.getPost(id);
-    public ResponseEntity<CommonResponse<PostResponseDto>> getPosts(@PathVariable Long id){
-        Post post = postService.getPosts(id);
+
         PostResponseDto response = new PostResponseDto(post);
 
         return ResponseEntity.ok()
@@ -60,30 +62,23 @@ public class PostController {
                         .data(response)
                         .build());
     }
+
     @Transactional
     @PutMapping("/post/{id}")
-    public ResponseEntity<CommonResponse<PostResponseDto>> updatePost(@PathVariable Long id,PostRequestDto requestDto){
-                        .msg("생성이 완료 되었습니다.")
-                        .data(response)
-                        .build());
-    }
-    @PutMapping("/post/{id}")
-    public ResponseEntity<CommonResponse<PostResponseDto>> updatePost(@RequestBody PostRequestDto requestDto,@PathVariable Long id){
-        Post post = postService.updatePost(id,requestDto);
-        PostResponseDto response = new PostResponseDto(post);
-    // 완료
-        return ResponseEntity.ok()
-                .body(CommonResponse.<PostResponseDto>builder()
-                        .statusCode(HttpStatus.OK.value())
-                        .msg("수정이 완료 되었습니다.")
-                        .data(response)
-                        .build());
-    }
-//dg
-                        .msg("생성이 완료 되었습니다.")
-                        .data(response)
-                        .build());
+    public ResponseEntity<CommonResponse<PostResponseDto>> updatePost(@PathVariable Long id, PostRequestDto requestDto) {
+        {
+            Post post = postService.updatePost(id, requestDto);
+            PostResponseDto response = new PostResponseDto(post);
+            // 완료
+            return ResponseEntity.ok()
+                    .body(CommonResponse.<PostResponseDto>builder()
+                            .statusCode(HttpStatus.OK.value())
+                            .msg("수정이 완료 되었습니다.")
+                            .data(response)
+                            .build());
+        }
+
     }
 
-// asdfdsfsa
+
 }
