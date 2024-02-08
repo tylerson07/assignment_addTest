@@ -5,6 +5,7 @@ import com.sparta.newsfeed_project.dto.PostRequestDto;
 import com.sparta.newsfeed_project.dto.PostResponseDto;
 import com.sparta.newsfeed_project.entity.Post;
 import com.sparta.newsfeed_project.service.PostService;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,8 @@ import java.util.List;
 
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@Controller
+@RestController
+@Builder
 public class PostController {
     private final PostService postService;
     @PostMapping("/post")
