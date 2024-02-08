@@ -44,9 +44,7 @@ public class PostController {
                         .msg("조회가 완료 되었습니다.")
                         .data(response)
                         .build());
-        //sdaㄹㄴㅁsafadf
+        //sdaㄹㄴㅁsafadfasfdadfads
     }
-
-
 
 }
