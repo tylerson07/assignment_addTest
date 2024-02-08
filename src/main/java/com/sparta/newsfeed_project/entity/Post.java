@@ -34,6 +34,7 @@ public class Post {
     public void update(PostRequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
+        this.user = user;
     }
 
 }
