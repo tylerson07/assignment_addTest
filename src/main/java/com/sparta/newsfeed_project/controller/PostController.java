@@ -9,7 +9,7 @@ import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,11 +41,13 @@ public class PostController {
         return ResponseEntity.ok()
                 .body(CommonResponse.<List<PostResponseDto>>builder()
                         .statusCode(HttpStatus.OK.value())
-                        .msg("조회가 완료 되었습니다.")
+                        .msg("리스트 조회가 완료 되었습니다.")
                         .data(response)
                         .build());
     }
     @GetMapping("/post/{id}")
+    public ResponseEntity<CommonResponse<PostResponseDto>> getPost(@PathVariable Long id){
+        Post post = postService.getPost(id);
     public ResponseEntity<CommonResponse<PostResponseDto>> getPosts(@PathVariable Long id){
         Post post = postService.getPosts(id);
         PostResponseDto response = new PostResponseDto(post);
@@ -53,6 +55,14 @@ public class PostController {
         return ResponseEntity.ok()
                 .body(CommonResponse.<PostResponseDto>builder()
                         .statusCode(HttpStatus.OK.value())
+
+                        .msg("조회가 완료 되었습니다.")
+                        .data(response)
+                        .build());
+    }
+    @Transactional
+    @PutMapping("/post/{id}")
+    public ResponseEntity<CommonResponse<PostResponseDto>> updatePost(@PathVariable Long id,PostRequestDto requestDto){
                         .msg("생성이 완료 되었습니다.")
                         .data(response)
                         .build());
@@ -65,6 +75,11 @@ public class PostController {
         return ResponseEntity.ok()
                 .body(CommonResponse.<PostResponseDto>builder()
                         .statusCode(HttpStatus.OK.value())
+                        .msg("수정이 완료 되었습니다.")
+                        .data(response)
+                        .build());
+    }
+//dg
                         .msg("생성이 완료 되었습니다.")
                         .data(response)
                         .build());

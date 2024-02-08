@@ -6,6 +6,7 @@ import com.sparta.newsfeed_project.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,6 +22,17 @@ public class PostService {
 
     public List<Post> getPostList() {
         return postRepository.findAll();
+    }
+
+    public Post getPost(Long id) {
+        return findPostId(id);
+    }
+
+    public Post updatePost(Long id, PostRequestDto requestDto) {
+        Post post = findPostId(id);
+        post.update(requestDto);
+
+        return postRepository.save(post);
     }
 
     public Post findPostId(Long id){

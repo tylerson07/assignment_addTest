@@ -25,11 +25,10 @@ public class Post {
     @JoinColumn(name = "user_id") // 외래 키
     private User user;
     @Builder
-    public Post(Long id,String title, String content,User user){
+    public Post(Long id,String title, String content){
         this.id = id;
         this.title =title;
         this.content =content;
-        this.user = user;
     }
 
     public void update(PostRequestDto requestDto) {
