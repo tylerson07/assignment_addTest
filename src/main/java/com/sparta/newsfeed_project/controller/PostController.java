@@ -4,6 +4,7 @@ import com.sparta.newsfeed_project.CommonResponse;
 import com.sparta.newsfeed_project.dto.PostRequestDto;
 import com.sparta.newsfeed_project.dto.PostResponseDto;
 import com.sparta.newsfeed_project.entity.Post;
+//import com.sparta.newsfeed_project.entity.User;
 import com.sparta.newsfeed_project.service.PostService;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
@@ -23,9 +24,9 @@ import java.util.List;
 public class PostController {
     private final PostService postService;
 
-    @PostMapping("/post")
-    public ResponseEntity<CommonResponse<PostResponseDto>> createPost(@RequestBody PostRequestDto requestDto) {
-        Post post = postService.createPost(requestDto);
+    @PostMapping("/posts")
+    public ResponseEntity<CommonResponse<PostResponseDto>> createPost(@RequestBody PostRequestDto requestDto,@PathVariable Long userId) {
+        Post post = postService.createPost(requestDto,userId);
         PostResponseDto response = new PostResponseDto(post);
 
         return ResponseEntity.ok()
@@ -48,7 +49,7 @@ public class PostController {
                         .build());
     }
 
-    @GetMapping("/post/{id}")
+    @GetMapping("/posts/{id}")
     public ResponseEntity<CommonResponse<PostResponseDto>> getPost(@PathVariable Long id) {
         Post post = postService.getPost(id);
 
@@ -65,7 +66,7 @@ public class PostController {
 
     @Transactional
     @PutMapping("/post/{id}")
-    public ResponseEntity<CommonResponse<PostResponseDto>> updatePost(@PathVariable Long id, PostRequestDto requestDto) {
+    public ResponseEntity<CommonResponse<PostResponseDto>> updatePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto) {
         {
             Post post = postService.updatePost(id, requestDto);
             PostResponseDto response = new PostResponseDto(post);
