@@ -65,7 +65,7 @@ public class PostController {
     }
 
     @Transactional
-    @PutMapping("/post/{id}")
+    @PutMapping("/posts/{id}")
     public ResponseEntity<CommonResponse<PostResponseDto>> updatePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto) {
         {
             Post post = postService.updatePost(id, requestDto);

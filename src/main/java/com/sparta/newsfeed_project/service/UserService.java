@@ -6,8 +6,6 @@ import com.sparta.newsfeed_project.entity.User;
 import com.sparta.newsfeed_project.repository.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +21,7 @@ public class UserService {
         String password = requestDto.getPassword();
 //        String password = passwordEncoder().encode(requestDto.getPassword());
 
-        userRepository.save(new User(username, password));
+//        userRepository.save(new User(username, password));
     }
 
     @Transactional
