@@ -1,20 +1,35 @@
 package com.sparta.newsfeed_project.controller;
 
-import com.sparta.newsfeed_project.service.PostService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.sparta.newsfeed_project.dto.UserRequestDto;
+import com.sparta.newsfeed_project.dto.UserResponseDto;
+import com.sparta.newsfeed_project.service.UserService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping(value="/api/user")
 public class UserController {
+    private final UserService userService;
 
-    private final PostService postService;
-    public UserController(PostService postService){
-        this.postService = postService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
-//    @GetMapping("/profile")
-//   public UserRequestDto userGet(){
-//       return  UserRequestDto;
-//   }
+
+    //프로필 수정
+    @PutMapping("/{id}")
+    public ResponseEntity<UserResponseDto> updateProfile(
+            @PathVariable Long id,
+            @RequestBody UserRequestDto userRequestDto) {
+        try {
+            UserResponseDto updateProfile = userService.updateProfile(id, userRequestDto);
+            return ResponseEntity.ok().body(updateProfile);
+        }catch(IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 
 }
