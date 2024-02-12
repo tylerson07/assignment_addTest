@@ -1,6 +1,7 @@
 package com.sparta.newsfeed_project.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -23,4 +24,11 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> postList = new ArrayList<>();
 
+    @Builder
+    public User(Long userid,String username, String password,List<Post> postList){
+        this.userid = userid;
+        this.username = username;
+        this.password =password;
+        this.postList = postList;
+    }
 }
