@@ -1,13 +1,9 @@
 package com.sparta.newsfeed_project.controller;
-
 import com.sparta.newsfeed_project.dto.UserRequestDto;
 import com.sparta.newsfeed_project.dto.UserResponseDto;
 import com.sparta.newsfeed_project.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @RestController
