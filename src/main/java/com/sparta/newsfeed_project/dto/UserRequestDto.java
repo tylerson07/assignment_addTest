@@ -7,7 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserRequestDto {
-    Long id;
     String userName;
     String password;
     String intro;
@@ -20,6 +19,4 @@ public class UserRequestDto {
                 .build();
 
     }
-
-
 }

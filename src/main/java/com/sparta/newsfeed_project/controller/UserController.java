@@ -17,32 +17,12 @@ public class UserController {
 
     public final UserService userService;
 
-    //프로필 등록
-//    @PostMapping("/api/set")
-//    public UserRequsetDto setLogin(@RequestBody UserRequsetDto userRequsetDto){
-//        userService.setUser(userRequsetDto);
-//        return userRequsetDto;
-//    }
-
-    @GetMapping("/api/user/profile/{userId}")
+    @GetMapping("/profile/{userId}")
     public ResponseEntity<UserResponseDto> getProfile(@PathVariable Long userId) {
         User user = userService.getUser(userId);
         UserResponseDto userResponseDto = new UserResponseDto(user);
         return ResponseEntity.ok().body(userResponseDto);
     }
-
-    @GetMapping("/api/user/profile/all")
-    public List<User> all(){
-        return userService.findAll();
-    }
-
-//    @PostMapping("/api/user/profile")
-//    public User updataProfile(@RequestBody UserRequestDto requsetDto){
-//        User user = userService.updataUser(requsetDto);
-//        UserResponseDto userResponseDto = new UserResponseDto(user);
-//        return user;
-////        return ResponseEntity.ok().body(userResponseDto);
-//    }
 
     //프로필 수정
     @PutMapping("/{id}")

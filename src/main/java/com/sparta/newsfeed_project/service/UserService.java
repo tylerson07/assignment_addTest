@@ -23,24 +23,10 @@ public class UserService {
     }
 
 
-//    public void setUser(UserRequestDto userRequsetDto){
-//        User user = new User(
-//                userRequsetDto.getUserid(),
-//                userRequsetDto.getUserName(),
-//                userRequsetDto.getPassword(),
-//                userRequsetDto.getPostList()
-//        );
-//        userRepository.save(user);
-//    }
-
-    public List<User> findAll(){
-        List<User> all = userRepository.findAll();
-        return all;
-    }
     //프로필 수정
     @Transactional
     public UserResponseDto updateProfile(Long id, UserRequestDto dto) {
-       User user = checkPWAndGet(id, dto.getPassword());
+        User user = checkPWAndGet(id, dto.getPassword());
 
         user.setPassword(dto.getPassword());
         user.setIntro(dto.getIntro());
