@@ -2,15 +2,11 @@ package com.sparta.newsfeed_project.service;
 
 import com.sparta.newsfeed_project.dto.PostRequestDto;
 import com.sparta.newsfeed_project.entity.Post;
-import com.sparta.newsfeed_project.entity.User;
 import com.sparta.newsfeed_project.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
 
 @Service
 @RequiredArgsConstructor
@@ -35,20 +31,11 @@ public class PostService {
 
         return postRepository.save(post);
     }
-
     public Post findPostId(Long id){
         return postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다"));
     }
 
-    @Transactional
-    public Long delete(Long id){
-        postRepository.deleteById(id);
-        return id;
-
+    public Long delete(Long id) {
+        return null;
     }
-
-
-
-
-
 }
