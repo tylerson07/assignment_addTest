@@ -3,6 +3,8 @@ package com.sparta.newsfeed_project.service;
 import com.sparta.newsfeed_project.dto.LoginRequestDto;
 import com.sparta.newsfeed_project.dto.SignupRequestDto;
 import com.sparta.newsfeed_project.entity.User;
+import com.sparta.newsfeed_project.entity.UserRoleEnum;
+import com.sparta.newsfeed_project.jwt.JwtUtil;
 import com.sparta.newsfeed_project.repository.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -11,10 +13,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
+    private final JwtUtil jwtUtil;
     private final UserRepository userRepository;
 
     @Transactional
@@ -36,6 +41,8 @@ public class UserService {
         if (!passwordEncoder().matches(password,user.getPassword())) {
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
         }
+        String token = jwtUtil.createToken(user.getUsername(), user.getRole());
+        jwtUtil.addJwtToCookie(token, res);
 
     }
     public PasswordEncoder passwordEncoder() {

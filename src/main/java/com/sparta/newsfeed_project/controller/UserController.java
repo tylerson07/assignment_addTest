@@ -31,5 +31,4 @@ public class UserController {
         }
         return new ResponseEntity<>("login-sucess",HttpStatus.OK);
     }
-
 }

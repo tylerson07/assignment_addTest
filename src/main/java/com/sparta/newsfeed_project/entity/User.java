@@ -26,6 +26,8 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    private UserRoleEnum role;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> postList = new ArrayList<>();
 
