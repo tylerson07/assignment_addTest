@@ -4,6 +4,7 @@ import com.sparta.newsfeed_project.dto.PostRequestDto;
 import com.sparta.newsfeed_project.entity.Post;
 import com.sparta.newsfeed_project.entity.User;
 import com.sparta.newsfeed_project.repository.PostRepository;
+import jdk.jshell.execution.Util;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
-    public Post createPost(PostRequestDto dto) {
-        Post newPost = dto.toEntity();
+    public Post createPost(String token, PostRequestDto requestDto) {
+        Post newPost = requestDto.toEntity();
         return postRepository.save(newPost);
     }
 
@@ -46,9 +47,4 @@ public class PostService {
         return id;
 
     }
-
-
-
-
-
 }

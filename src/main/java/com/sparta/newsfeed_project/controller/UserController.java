@@ -2,6 +2,9 @@ package com.sparta.newsfeed_project.controller;
 
 import com.sparta.newsfeed_project.dto.LoginRequestDto;
 import com.sparta.newsfeed_project.dto.SignupRequestDto;
+import com.sparta.newsfeed_project.dto.UserRequestDto;
+import com.sparta.newsfeed_project.dto.UserResponseDto;
+import com.sparta.newsfeed_project.entity.User;
 import com.sparta.newsfeed_project.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +20,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/user/signup")
-    public ResponseEntity<String> signup(@RequestBody SignupRequestDto requestDto) {
+    public void signup(@RequestBody SignupRequestDto requestDto) {
         userService.signup(requestDto);
-        return new ResponseEntity<>("signup-sucess",HttpStatus.OK);
     }
 
     @GetMapping("/user/login")
@@ -27,8 +29,30 @@ public class UserController {
         try {
             userService.login(requestDto, res);
         } catch (Exception e) {
-           e.getMessage();
+            e.getMessage();
         }
         return new ResponseEntity<>("login-sucess",HttpStatus.OK);
     }
+  //프로필 단건 조회
+  @GetMapping("/user/profile/{id}")
+    public ResponseEntity<UserResponseDto> getProfile(@PathVariable Long id) {
+        User user = userService.getUser(id);
+        UserResponseDto userResponseDto = new UserResponseDto(user);
+        return ResponseEntity.ok().body(userResponseDto);
+    }
+
+    //프로필 수정
+    @PutMapping("/user/profile/{id}")
+    public ResponseEntity<UserResponseDto> updateProfile(
+            @PathVariable Long id,
+            @RequestBody UserRequestDto userRequestDto) {
+        try {
+            UserResponseDto updateProfile = userService.updateProfile(id, userRequestDto);
+            return ResponseEntity.ok().body(updateProfile);
+        }catch(IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+
 }

@@ -4,7 +4,6 @@ import com.sparta.newsfeed_project.CommonResponse;
 import com.sparta.newsfeed_project.dto.PostRequestDto;
 import com.sparta.newsfeed_project.dto.PostResponseDto;
 import com.sparta.newsfeed_project.entity.Post;
-import com.sparta.newsfeed_project.entity.User;
 import com.sparta.newsfeed_project.service.PostService;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
@@ -20,13 +19,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @Builder
-// gkdl
 public class PostController {
     private final PostService postService;
 
     @PostMapping("/post")
-    public ResponseEntity<CommonResponse<PostResponseDto>> createPost(@RequestBody PostRequestDto requestDto) {
-        Post post = postService.createPost(requestDto);
+    public ResponseEntity<CommonResponse<PostResponseDto>> createPost(@RequestHeader(name = "Authorization")String token, @RequestBody PostRequestDto requestDto) {
+        Post post = postService.createPost(token, requestDto);
         PostResponseDto response = new PostResponseDto(post);
 
         return ResponseEntity.ok()
