@@ -24,6 +24,7 @@ public class Post {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
     @Builder
     public Post(Long id,String title, String content,User user){
         this.id = id;
@@ -35,7 +36,6 @@ public class Post {
     public void update(PostRequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
-        this.user = requestDto.getUser();
     }
 
 }

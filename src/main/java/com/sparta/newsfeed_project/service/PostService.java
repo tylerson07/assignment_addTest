@@ -4,6 +4,7 @@ import com.sparta.newsfeed_project.dto.PostRequestDto;
 import com.sparta.newsfeed_project.entity.Post;
 import com.sparta.newsfeed_project.entity.User;
 import com.sparta.newsfeed_project.repository.PostRepository;
+import com.sparta.newsfeed_project.security.UserDetailsImpl;
 import jdk.jshell.execution.Util;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,11 +18,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
-    public Post createPost(String token, PostRequestDto requestDto) {
+
+
+    public Post createPost(PostRequestDto requestDto, UserDetailsImpl userDetails) {
         Post newPost = requestDto.toEntity();
+        newPost.setUser(userDetails.getUser());
+        System.out.println("user = " + newPost.getUser());
         return postRepository.save(newPost);
     }
-
     public List<Post> getPostList() {
         return postRepository.findAll();
     }
@@ -47,4 +51,5 @@ public class PostService {
         return id;
 
     }
+
 }

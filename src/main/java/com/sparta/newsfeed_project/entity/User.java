@@ -40,7 +40,6 @@ public class User {
         this.role = role;
     }
 
-
     @Builder
     public User(Long userId, String userName, String password, String intro){
         this.userId = userId;

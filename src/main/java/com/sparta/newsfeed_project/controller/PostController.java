@@ -4,11 +4,13 @@ import com.sparta.newsfeed_project.CommonResponse;
 import com.sparta.newsfeed_project.dto.PostRequestDto;
 import com.sparta.newsfeed_project.dto.PostResponseDto;
 import com.sparta.newsfeed_project.entity.Post;
+import com.sparta.newsfeed_project.security.UserDetailsImpl;
 import com.sparta.newsfeed_project.service.PostService;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +25,8 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping("/post")
-    public ResponseEntity<CommonResponse<PostResponseDto>> createPost(@RequestHeader(name = "Authorization")String token, @RequestBody PostRequestDto requestDto) {
-        Post post = postService.createPost(token, requestDto);
+    public ResponseEntity<CommonResponse<PostResponseDto>> createPost(@RequestBody PostRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        Post post = postService.createPost(requestDto, userDetails);
         PostResponseDto response = new PostResponseDto(post);
 
         return ResponseEntity.ok()
