@@ -11,11 +11,11 @@ import lombok.Setter;
 public class PostRequestDto {
     private String title;
     private String content;
+    private User user;
     public Post toEntity() {
         return Post.builder()
                 .title(this.title)
                 .content(this.content)
-
                 .build();
     }
 }

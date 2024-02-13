@@ -45,5 +45,26 @@ public class UserController {
         }
         return new ResponseEntity<>("login-sucess",HttpStatus.OK);
     }
+  //프로필 단건 조회
+  @GetMapping("/user/profile/{id}")
+    public ResponseEntity<UserResponseDto> getProfile(@PathVariable Long id) {
+        User user = userService.getUser(id);
+        UserResponseDto userResponseDto = new UserResponseDto(user);
+        return ResponseEntity.ok().body(userResponseDto);
+    }
+
+    //프로필 수정
+    @PutMapping("/user/profile/{id}")
+    public ResponseEntity<UserResponseDto> updateProfile(
+            @PathVariable Long id,
+            @RequestBody UserRequestDto userRequestDto) {
+        try {
+            UserResponseDto updateProfile = userService.updateProfile(id, userRequestDto);
+            return ResponseEntity.ok().body(updateProfile);
+        }catch(IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
 
 }
