@@ -13,12 +13,12 @@ public class PostResponseDto {
     private Long id;
     private String content;
     private String title;
-    private Long user_id;
     @Builder
     public PostResponseDto(Post post){
         this.id=post.getId();
         this.content = post.getContent();
         this.title =post.getTitle();
-        this.user_id= post.getUser().getUser_id();
     }
+
+
 }

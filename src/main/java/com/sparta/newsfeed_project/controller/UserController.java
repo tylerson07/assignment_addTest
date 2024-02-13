@@ -32,19 +32,18 @@ public class UserController {
     }
 
     @PostMapping("/user/signup")
-    public String signup(@RequestBody SignupRequestDto requestDto) {
+    public void signup(@RequestBody SignupRequestDto requestDto) {
         userService.signup(requestDto);
-        return "redirect:/api/user/login-page";
     }
 
     @GetMapping("/user/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequestDto requestDto) {
-//        try {
-            userService.login(requestDto);
-//        } catch (Exception e) {
-//            return "redirect:/api/user/login-page";
-//        }
-        return new ResponseEntity<>("sucess",HttpStatus.OK);
+    public ResponseEntity<String> login(@RequestBody LoginRequestDto requestDto, HttpServletResponse res) {
+        try {
+            userService.login(requestDto, res);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return new ResponseEntity<>("login-sucess",HttpStatus.OK);
     }
 
 }

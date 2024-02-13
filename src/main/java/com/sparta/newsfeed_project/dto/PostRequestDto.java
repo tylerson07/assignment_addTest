@@ -15,6 +15,7 @@ public class PostRequestDto {
         return Post.builder()
                 .title(this.title)
                 .content(this.content)
+
                 .build();
     }
 }

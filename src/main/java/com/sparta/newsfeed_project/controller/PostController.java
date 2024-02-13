@@ -24,9 +24,9 @@ import java.util.List;
 public class PostController {
     private final PostService postService;
 
-    @PostMapping("/posts")
-    public ResponseEntity<CommonResponse<PostResponseDto>> createPost(@RequestBody PostRequestDto requestDto,@PathVariable Long userId) {
-        Post post = postService.createPost(requestDto,userId);
+    @PostMapping("/posts/{id}")
+    public ResponseEntity<CommonResponse<PostResponseDto>> createPost(@RequestBody PostRequestDto requestDto,@PathVariable Long id) {
+        Post post = postService.createPost(requestDto);
         PostResponseDto response = new PostResponseDto(post);
 
         return ResponseEntity.ok()
