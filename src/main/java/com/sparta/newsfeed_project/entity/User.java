@@ -1,26 +1,38 @@
 package com.sparta.newsfeed_project.entity;
 
+
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@RequiredArgsConstructor
+@Getter @Setter
+@NoArgsConstructor
+@Table(name = "users")
 public class User {
 
-    @Id
-    private Long userid;
-    @Column
-    private String username;
-    @Column
-    private String password;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Post> postList = new ArrayList<>();
+    @Id @GeneratedValue
+    @Column(nullable = false)
+    private Long id;
 
+    @Column(length = 10, nullable = false)
+    private String userName;
+
+    @Column(length = 13, nullable = false)
+    private String password;
+
+    @Column(length = 100)
+    private String intro;
+
+    @Builder
+    public User(Long userId, String userName, String password, String intro){
+        this.id = userId;
+        this.userName = userName;
+        this.password =password;
+        this.intro = intro;
+    }
 }
