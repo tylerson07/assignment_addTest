@@ -24,6 +24,7 @@ import java.util.List;
 public class PostController {
     private final PostService postService;
 
+//    완료
     @PostMapping("/post")
     public ResponseEntity<CommonResponse<PostResponseDto>> createPost(@RequestBody PostRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         Post post = postService.createPost(requestDto, userDetails);
