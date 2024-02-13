@@ -16,35 +16,20 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/home")
-    public String home() {
-        return "index";
-    }
-
-    @GetMapping("/user/signup-page")
-    public String signup() {
-        return "signup";
-    }
-
-    @GetMapping("/user/login-page")
-    public String login() {
-        return "login-page";
-    }
-
     @PostMapping("/user/signup")
-    public String signup(@RequestBody SignupRequestDto requestDto) {
+    public ResponseEntity<String> signup(@RequestBody SignupRequestDto requestDto) {
         userService.signup(requestDto);
-        return "redirect:/api/user/login-page";
+        return new ResponseEntity<>("signup-sucess",HttpStatus.OK);
     }
 
     @GetMapping("/user/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequestDto requestDto) {
-//        try {
-            userService.login(requestDto);
-//        } catch (Exception e) {
-//            return "redirect:/api/user/login-page";
-//        }
-        return new ResponseEntity<>("sucess",HttpStatus.OK);
+    public ResponseEntity<String> login(@RequestBody LoginRequestDto requestDto, HttpServletResponse res) {
+        try {
+            userService.login(requestDto, res);
+        } catch (Exception e) {
+           e.getMessage();
+        }
+        return new ResponseEntity<>("login-sucess",HttpStatus.OK);
     }
 
 }

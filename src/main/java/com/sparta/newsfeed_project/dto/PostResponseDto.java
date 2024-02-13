@@ -1,34 +1,29 @@
 package com.sparta.newsfeed_project.dto;
 
 import com.sparta.newsfeed_project.entity.Post;
+import com.sparta.newsfeed_project.entity.User;
 import lombok.*;
 
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class PostResponseDto {
 
     private Long id;
     private String content;
     private String title;
-
-    public Post toEntity() {
-        Post build = Post.builder()
-                .id(id)
-                .content(content)
-                .title(title)
-                .build();
-        return build;
+    private User user;
 
 
-    }
+
+
 
     @Builder
-    public PostResponseDto(Long id,String content,String title){
-        this.id=id;
-        this.content =content;
-        this.title =title;
-
+    public PostResponseDto(Post post){
+        this.id=post.getId();
+        this.content = post.getContent();
+        this.title =post.getTitle();
+        this.user = post.getUser();
     }
 }

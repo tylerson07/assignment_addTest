@@ -20,26 +20,25 @@ public class UserService {
     @Transactional
     public void signup(SignupRequestDto requestDto) {
         String username = requestDto.getUsername();
-        String password = requestDto.getPassword();
-//        String password = passwordEncoder().encode(requestDto.getPassword());
+        String password = passwordEncoder().encode(requestDto.getPassword());
 
         userRepository.save(new User(username, password));
     }
 
     @Transactional
-    public void login(LoginRequestDto requestDto) {
+    public void login(LoginRequestDto requestDto, HttpServletResponse res) {
         String username = requestDto.getUsername();
         String password = requestDto.getPassword();
 
         User user = userRepository.findByUsername(username).orElseThrow(() ->
-                new NullPointerException("존재하지 않는 id입니다."));
-//        if (passwordEncoder().matches(password,user.getPassword())) {
-//            throw new IllegalArgumentException("잘못된 비밀번호입니다.");
-//        }
-//        String token = jwtUtil.createToken(user.getUsername(), user.getRole());
-//        jwtUtil.addJwtToCookie(token,res);
+            new IllegalArgumentException("존재하지 않는 username 입니다."));
+
+        if (!passwordEncoder().matches(password,user.getPassword())) {
+            throw new IllegalArgumentException("잘못된 비밀번호입니다.");
+        }
+
     }
-    //    public PasswordEncoder passwordEncoder() {
-    //        return new BCryptPasswordEncoder();
-    //    }
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
