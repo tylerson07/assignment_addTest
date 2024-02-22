@@ -66,12 +66,7 @@ public class PostController {
 
     }
 
- /*   @PutMapping("/post/{id}")
-    public Long updatePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto){
-        return postService.update(id,requestDto);
 
-    }
-    */
 
 
  @DeleteMapping("/post/{id}")

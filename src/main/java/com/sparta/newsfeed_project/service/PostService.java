@@ -1,6 +1,7 @@
 package com.sparta.newsfeed_project.service;
 
 import com.sparta.newsfeed_project.dto.PostRequestDto;
+import com.sparta.newsfeed_project.dto.PostResponseDto;
 import com.sparta.newsfeed_project.entity.Post;
 import com.sparta.newsfeed_project.entity.User;
 import com.sparta.newsfeed_project.repository.PostRepository;
@@ -51,5 +52,6 @@ public class PostService {
         return id;
 
     }
+
 
 }

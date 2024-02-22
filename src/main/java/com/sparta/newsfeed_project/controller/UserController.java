@@ -6,6 +6,7 @@ import com.sparta.newsfeed_project.dto.UserRequestDto;
 import com.sparta.newsfeed_project.dto.UserResponseDto;
 import com.sparta.newsfeed_project.entity.User;
 import com.sparta.newsfeed_project.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,8 @@ public class UserController {
         }
         return new ResponseEntity<>("login-sucess",HttpStatus.OK);
     }
+
+
   //프로필 단건 조회
   @GetMapping("/user/profile/{id}")
     public ResponseEntity<UserResponseDto> getProfile(@PathVariable Long id) {
@@ -53,6 +56,7 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
     }
+
 
 
 }
